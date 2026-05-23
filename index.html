@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your CV Kit — Altinar</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --purple: #7c3aed; --purple-l: rgba(124,58,237,0.08); --purple-b: rgba(124,58,237,0.22);
+  --amber: #f59e0b;
+  --text: #111118; --muted: #6b7280; --faint: #9ca3af;
+  --bg: #fff; --bg2: #f9f9fb; --border: rgba(0,0,0,0.08); --border-md: rgba(0,0,0,0.14);
+  --r: 10px; --r-lg: 14px;
+}
+body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--bg2); min-height: 100vh; -webkit-font-smoothing: antialiased; }
+
+.topbar { background: #07071a; padding: 14px 32px; display: flex; justify-content: space-between; align-items: center; }
+.topbar-logo { font-family: 'Playfair Display', serif; font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+.topbar-tag { font-size: 11px; color: rgba(255,255,255,0.35); background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); padding: 4px 12px; border-radius: 20px; }
+
+.hero { background: #07071a; color: #fff; padding: 52px 32px 44px; position: relative; overflow: hidden; text-align: center; }
+.hero::before { content: ''; position: absolute; top: -60px; left: 50%; transform: translateX(-50%); width: 400px; height: 400px; background: radial-gradient(circle, rgba(124,58,237,0.28) 0%, transparent 68%); pointer-events: none; }
+.confetti { font-size: 36px; margin-bottom: 16px; }
+.hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(24px,5vw,36px); font-weight: 900; line-height: 1.2; margin-bottom: 10px; }
+.hero h1 em { font-style: italic; color: #a78bfa; }
+.hero-sub { font-size: 14px; font-weight: 300; color: rgba(255,255,255,0.55); max-width: 480px; margin: 0 auto; line-height: 1.75; }
+
+.container { max-width: 680px; margin: 0 auto; padding: 32px 20px 60px; }
+
+.section-label { font-size: 11px; font-weight: 500; color: var(--purple); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 14px; }
+
+/* KIT ITEMS */
+.kit-items { display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+.kit-item { background: var(--bg); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 20px 22px; display: flex; gap: 16px; align-items: flex-start; }
+.kit-item-icon { width: 42px; height: 42px; border-radius: 10px; background: var(--purple-l); border: 1px solid var(--purple-b); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+.kit-item-body { flex: 1; }
+.kit-item-title { font-size: 14px; font-weight: 500; margin-bottom: 3px; }
+.kit-item-desc { font-size: 13px; color: var(--muted); line-height: 1.55; margin-bottom: 12px; }
+.kit-item-btn { display: inline-block; background: var(--purple); color: #fff; text-decoration: none; padding: 9px 20px; border-radius: 8px; font-size: 13px; font-weight: 500; transition: background 0.15s, transform 0.12s; }
+.kit-item-btn:hover { background: #6d28d9; transform: translateY(-1px); }
+.kit-item-btn.secondary { background: transparent; color: var(--purple); border: 1.5px solid var(--purple-b); }
+.kit-item-btn.secondary:hover { background: var(--purple-l); }
+
+/* DIVIDER */
+.divider { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
+
+/* TIPS */
+.tips-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 32px; }
+.tip-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--r); padding: 16px 18px; }
+.tip-icon { font-size: 18px; margin-bottom: 6px; }
+.tip-title { font-size: 12px; font-weight: 500; margin-bottom: 4px; }
+.tip-body { font-size: 12px; color: var(--muted); line-height: 1.55; }
+
+/* UPGRADE BOX */
+.upgrade-box { background: #07071a; border-radius: var(--r-lg); padding: 24px 26px; color: #fff; text-align: center; }
+.upgrade-eyebrow { font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--amber); margin-bottom: 10px; }
+.upgrade-title { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+.upgrade-sub { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 20px; max-width: 420px; margin-left: auto; margin-right: auto; }
+.upgrade-features { display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px; text-align: left; max-width: 320px; margin-left: auto; margin-right: auto; }
+.upgrade-feature { font-size: 13px; color: rgba(255,255,255,0.65); display: flex; gap: 8px; }
+.upgrade-feature::before { content: '+'; color: #a78bfa; font-weight: 500; flex-shrink: 0; }
+.upgrade-btn { display: inline-block; background: var(--purple); color: #fff; text-decoration: none; padding: 12px 28px; border-radius: 9px; font-size: 14px; font-weight: 500; transition: background 0.15s; }
+.upgrade-btn:hover { background: #6d28d9; }
+.upgrade-price { font-size: 12px; color: rgba(255,255,255,0.3); margin-top: 10px; }
+
+footer { text-align: center; padding: 24px; font-size: 12px; color: var(--faint); }
+
+@media (max-width: 480px) {
+  .topbar, .hero { padding-left: 20px; padding-right: 20px; }
+  .tips-grid { grid-template-columns: 1fr; }
+  .kit-item { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="topbar-logo">Altinar</span>
+  <span class="topbar-tag">CV Kit — $11.99</span>
+</div>
+
+<div class="hero">
+  <div class="confetti">🎉</div>
+  <h1>Your kit is ready.<br><em>Let's get you hired.</em></h1>
+  <p class="hero-sub">Everything you need is below. Start with the CV Writing Guide, then open the template and fill it in section by section.</p>
+</div>
+
+<div class="container">
+
+  <div class="section-label">Your CV Kit — 2 tools</div>
+
+  <div class="kit-items">
+
+    <div class="kit-item">
+      <div class="kit-item-icon">📖</div>
+      <div class="kit-item-body">
+        <div class="kit-item-title">Step 1 — CV Writing Guide</div>
+        <div class="kit-item-desc">Start here. A section-by-section guide to writing a UAE-optimised CV. Includes the 6-Minute Tailoring Method — use it every time you apply to a new job.</div>
+        <!-- REPLACE THE HREF BELOW WITH YOUR HOSTED URL -->
+        <a class="kit-item-btn" href="https://altinar-cv-guide.netlify.app/" target="_blank">Open CV Writing Guide →</a>
+      </div>
+    </div>
+
+    <div class="kit-item">
+      <div class="kit-item-icon">📄</div>
+      <div class="kit-item-body">
+        <div class="kit-item-title">Step 2 — UAE CV Template (Word)</div>
+        <div class="kit-item-desc">A clean, ATS-friendly one-page CV template built for the Dubai job market. Open it in Word, follow the guide above, and fill in your own information.</div>
+        <!-- REPLACE THE HREF BELOW WITH YOUR GUMROAD FILE LINK OR HOSTED URL -->
+        <div style="background:#f9f9fb; border:1px solid rgba(0,0,0,0.08); border-radius:8px; padding:12px 16px; font-size:13px; color:#6b7280; line-height:1.65;">
+          📧 <strong style="color:#111118;">Check your Gumroad receipt email</strong> → click <strong style="color:#111118;">"View Content"</strong> → download <strong style="color:#111118;">Dubai_General_CV_Template.docx</strong>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <hr class="divider">
+
+  <div class="section-label" style="margin-bottom:12px;">Quick reminders</div>
+  <div class="tips-grid">
+    <div class="tip-card">
+      <div class="tip-icon">⚡</div>
+      <div class="tip-title">Tailor for every application</div>
+      <div class="tip-body">Use the 6-Minute Method in the guide every single time. Even two small edits make a real difference to ATS scoring.</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">💰</div>
+      <div class="tip-title">Know your AED number</div>
+      <div class="tip-body">Before any conversation, know your salary expectation in AED/month. Never say "negotiable" to a UAE recruiter.</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">📎</div>
+      <div class="tip-title">PDF for email, Word for portals</div>
+      <div class="tip-body">Save two versions. Submit PDF when applying by email or to a recruiter. Use Word (.docx) when a job portal asks for it.</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🔗</div>
+      <div class="tip-title">Sync your LinkedIn</div>
+      <div class="tip-body">Your LinkedIn must match your CV exactly — same titles, same dates. Recruiters cross-check and inconsistencies raise red flags.</div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- UPGRADE CTA -->
+  <div class="upgrade-box">
+    <div class="upgrade-eyebrow">Ready to go further?</div>
+    <div class="upgrade-title">Upgrade to the full system for just $13 more</div>
+    <div class="upgrade-sub">You already have the CV kit. Add the Dubai Job Search Strategy Guide and the smart Job Application Tracker — the two tools that help you actually land interviews, not just apply.</div>
+    <div class="upgrade-features">
+      <div class="upgrade-feature">Dubai Job Search Strategy Guide — how hiring really works in the UAE</div>
+      <div class="upgrade-feature">Smart Job Application Tracker — follow-ups, statuses, UAE-specific fields</div>
+      <div class="upgrade-feature">Works alongside your existing CV kit — nothing duplicated</div>
+    </div>
+    <a class="upgrade-btn" href="https://altinartool.gumroad.com/l/pcwuw" target="_blank">Upgrade for $13 →</a>
+    <div class="upgrade-price">One-time payment · Instant access · No subscription</div>
+  </div>
+
+</div>
+
+<footer>© 2025 Altinar · For personal use only · Good luck with your search 🙌</footer>
+
+</body>
+</html>
